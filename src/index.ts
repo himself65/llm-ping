@@ -1,4 +1,4 @@
-export type Platform = 'openai' | 'anthropic' | 'google' | 'unknown'
+export type Platform = "openai" | "anthropic" | "google" | "xai" | "unknown";
 
 /**
  * Predict the platform based on the API key prefix
@@ -7,19 +7,19 @@ export type Platform = 'openai' | 'anthropic' | 'google' | 'unknown'
  *
  * @param apiKey
  */
-export function predict (
-  apiKey: string
-): Platform {
-  if (apiKey.startsWith('sk-proj')) {
-    return 'openai'
-  } else if (apiKey.startsWith('sk-ant')) {
-    return 'anthropic'
-  } else if (apiKey.startsWith('AI')) {
+export function predict(apiKey: string): Platform {
+  if (apiKey.startsWith("sk-proj")) {
+    return "openai";
+  } else if (apiKey.startsWith("sk-ant")) {
+    return "anthropic";
+  } else if (apiKey.startsWith("AI")) {
     if (apiKey.length === 39) {
-      return 'google'
+      return "google";
     }
+  } else if (apiKey.startsWith("xai")) {
+    return "xai";
   }
-  return 'unknown'
+  return "unknown";
 }
 
 /**
@@ -30,32 +30,38 @@ export function predict (
  * @param apiKey - The API key to validate
  * @param platform - The platform to validate against. If not provided, it will be predicted from the API key.
  */
-export async function ping (
+export async function ping(
   apiKey: string,
-  platform?: Omit<Platform, 'unknown'>
+  platform?: Omit<Platform, "unknown">,
 ): Promise<boolean> {
   if (!platform) {
-    platform = predict(apiKey)
+    platform = predict(apiKey);
   }
   switch (platform) {
-    case 'openai':
-      return fetch('https://api.openai.com/v1/models', {
+    case "openai":
+      return fetch("https://api.openai.com/v1/models", {
         headers: {
-          Authorization: `Bearer ${apiKey}`
-        }
-      }).then(r => r.status !== 401)
-    case 'anthropic':
-      return fetch('https://api.anthropic.com/v1/models', {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }).then((r) => r.status !== 401);
+    case "anthropic":
+      return fetch("https://api.anthropic.com/v1/models", {
         headers: {
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01'
-        }
-      }).then(r => r.status !== 401)
-    case 'google':
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+        },
+      }).then((r) => r.status !== 401);
+    case "google":
       return fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`).
-        then(r => r.status !== 401)
+        `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`,
+      ).then((r) => r.status !== 401);
+    case "xai":
+      return fetch("https://api.x.ai/v1/models", {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }).then((r) => r.status !== 401);
     default:
-      throw new Error('Unsupported API key')
+      throw new Error("Unsupported API key");
   }
 }
