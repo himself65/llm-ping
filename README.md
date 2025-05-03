@@ -1,17 +1,17 @@
-# llm ping
+# ai ping
 
 ```shell
 npm i llm-ping
 ```
 
 ```javascript
-import { ping } from 'llm-ping'
+import { ping } from 'ai-ping'
 
 const isValid = await ping('sk-...')
 ```
 
 ```javascript
-import { predit } from 'llm-ping';
+import { predit } from 'ai-ping';
 
 const platform = predit('sk-...');
 // => 'openai'

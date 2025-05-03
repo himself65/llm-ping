@@ -1,5 +1,5 @@
 {
-  "name": "llm-ping",
+  "name": "ai-ping",
   "version": "0.0.1",
   "description": "ping AI provider to check if a api key is valid",
   "type": "module",
