@@ -1,7 +1,7 @@
 # ai ping
 
 ```shell
-npm i llm-ping
+npm i ai-ping
 ```
 
 ```javascript
