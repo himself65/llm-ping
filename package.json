@@ -1,0 +1,39 @@
+{
+  "name": "llm-ping",
+  "version": "0.0.1",
+  "description": "ping AI provider to check if a api key is valid",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "keywords": [
+    "llm",
+    "api-key",
+    "validate",
+    "ping",
+    "ai",
+    "openai",
+    "claude",
+    "anthropic",
+    "google",
+    "gemini"
+  ],
+  "scripts": {
+    "build": "bunchee"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "bunchee": "^6.5.1",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.10.0"
+}
