@@ -1,6 +1,6 @@
 {
   "name": "ai-ping",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ping AI provider to check if a api key is valid",
   "type": "module",
   "main": "dist/index.cjs",
